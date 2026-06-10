@@ -1,6 +1,6 @@
 # Noa Sudoku Website Plan
 
-Status: Planning only
+Status: First implementation ready
 Target repo: `noa-sudoku/noa-sudoku.github.io`
 Target URL: `https://noa-sudoku.github.io/`
 
@@ -86,7 +86,7 @@ Content requirements:
 - Local game progress storage.
 - iCloud/CloudKit use for clear records, if enabled by the user and device settings.
 - Notification permission use for reminders.
-- Contact/support email placeholder.
+- Support email: `iam@xoghks.com`.
 - Copyright footer.
 
 ### `/support/`
@@ -96,7 +96,7 @@ Purpose: Public support URL for App Store and users.
 Content requirements:
 
 - Korean and English versions on the same page.
-- Contact email placeholder.
+- Support email: `iam@xoghks.com`.
 - Bug report checklist:
   - App version
   - iOS/iPadOS version
@@ -108,6 +108,16 @@ Content requirements:
   - Widget refresh
   - Notifications
   - iCloud sync scope
+
+### `/features/`
+
+Purpose: Feature overview page for users who want to understand the app before downloading.
+
+Content requirements:
+
+- Korean and English versions through the site language toggle.
+- Feature rows with simple visuals matching the calm site style.
+- No third-party or Apple-owned logos beyond approved App Store badge usage.
 
 ### Optional Later Pages
 
@@ -121,9 +131,8 @@ Do not build these in the first pass unless needed.
 
 First version:
 
-- Keep Korean and English on the same page for `/privacy/` and `/support/`.
-- On the home page, show Korean and English together in short blocks.
-- Add a simple language toggle only if the page starts feeling too dense.
+- Keep one route per page and switch Korean/English with the site language toggle.
+- Keep all key legal/support URLs stable regardless of selected language.
 
 Later version:
 
@@ -167,13 +176,9 @@ Suggested colors:
 
 Dark mode:
 
-- Background: `#10141C`
-- Surface: `#171D27`
-- Text: `#F5F7FB`
-- Muted text: `#A8B1C3`
-- Border: `#2A3342`
-- Accent blue: `#6EA8FF`
-- Soft blue surface: `#14233A`
+- Use a neutral charcoal background rather than a blue-tinted dark theme.
+- Keep the existing blue accent for active navigation and links only.
+- Avoid large blue surfaces in dark mode.
 
 ## Motion Direction
 
@@ -318,11 +323,11 @@ Asset source candidates:
 
 - Create Vite + React + TypeScript project.
 - Add CSS tokens for light/dark mode.
-- Configure GitHub Pages deployment.
 - Add route/page structure:
   - Home
-  - Privacy
+  - Features
   - Support
+  - Privacy
 
 ### Phase 2: Design System
 
@@ -355,9 +360,8 @@ Asset source candidates:
 
 ## Open Decisions
 
-- React or Vue final choice. Current recommendation: React.
-- Use one bilingual page or dedicated `/ko` and `/en` routes in the first version.
-- Exact support email.
+- GitHub Pages deployment workflow or manual Pages configuration.
+- Optional Open Graph image.
 - Whether to use a custom domain later.
 - Which screenshots to include.
 - Whether the hero board animation should be CSS-only or React state-driven.
