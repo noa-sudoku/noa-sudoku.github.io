@@ -1,19 +1,18 @@
-# noa-sudoku.github.io
+# Noa Sudoku
 
-Official website for Noa Sudoku. 광고 없는 스도쿠 앱 공식 홈페이지.
+Official website for Noa Sudoku, an ad-free Sudoku app for iPhone and iPad.
 
-## Development
+Noa Sudoku is designed for calm, focused play without ads, banners, or clutter.
+The website provides the app overview, feature introduction, support page, and
+privacy policy.
 
-```sh
-npm install
-npm run dev
-```
+## Links
 
-## Build
+- Website: https://noa-sudoku.github.io/
+- App Store: https://apple.co/4ed2g25
+- Privacy Policy: https://noa-sudoku.github.io/privacy/
+- Support: https://noa-sudoku.github.io/support/
 
-```sh
-npm run build
-```
+## Copyright
 
-The site is built as a Vite multi-page app so `/`, `/features/`, `/support/`,
-and `/privacy/` can be used as direct GitHub Pages URLs.
+© 2025 TaeHwan Kim. All rights reserved.
