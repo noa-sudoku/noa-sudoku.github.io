@@ -288,7 +288,7 @@ img {
 
 .language-switch {
   display: inline-grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(3, auto);
   min-height: 28px;
   gap: 10px;
 }
