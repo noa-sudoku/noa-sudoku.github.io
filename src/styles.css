@@ -669,7 +669,7 @@ html[lang="ja"] .policy-item h2 {
 }
 
 .marketing-page {
-  width: min(960px, calc(100% - 32px));
+  width: min(1120px, calc(100% - 32px));
 }
 
 .document-hero {
@@ -701,8 +701,8 @@ html[lang="ja"] .policy-item h2 {
 
 .feature-row {
   display: grid;
-  grid-template-columns: 70px minmax(0, 1fr) minmax(260px, 420px);
-  gap: 28px;
+  grid-template-columns: 58px minmax(260px, 360px) minmax(480px, 1fr);
+  gap: 36px;
   align-items: center;
   width: 100%;
   max-width: 100%;
@@ -738,7 +738,7 @@ html[lang="ja"] .policy-item h2 {
 .feature-visual {
   position: relative;
   justify-self: end;
-  width: min(420px, 100%);
+  width: min(620px, 100%);
   aspect-ratio: 16 / 9;
   overflow: visible;
   border-radius: 8px;
@@ -752,6 +752,7 @@ html[lang="ja"] .policy-item h2 {
   height: 100%;
   object-fit: contain;
   object-position: center;
+  transform-origin: center;
 }
 
 :root[data-theme="dark"] .feature-visual {
@@ -772,7 +773,7 @@ html[lang="ja"] .policy-item h2 {
 }
 
 .feature-visual-difficulty {
-  width: min(320px, 100%);
+  width: min(620px, 100%);
 }
 
 .feature-row p,
@@ -1192,16 +1193,16 @@ html[lang="ja"] .policy-item h2 {
   }
 
   .feature-row {
-    grid-template-columns: 54px minmax(0, 1fr) 260px;
-    gap: 20px;
+    grid-template-columns: 48px minmax(0, 1fr) minmax(330px, 390px);
+    gap: 22px;
   }
 
   .feature-visual {
-    width: 260px;
+    width: min(390px, 100%);
   }
 
   .feature-visual-difficulty {
-    width: 260px;
+    width: min(390px, 100%);
   }
 
   .support-contact {
@@ -1298,21 +1299,26 @@ html[lang="ja"] .policy-item h2 {
 
   .feature-row {
     grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 28px 0;
+    gap: 18px;
+    padding: 34px 0;
   }
 
   .feature-visual {
-    justify-self: start;
-    width: min(100%, 340px);
+    justify-self: center;
+    width: 100%;
+    margin-top: 2px;
   }
 
   .feature-visual-difficulty {
-    width: min(100%, 340px);
+    width: 100%;
   }
 
   .feature-visual-records {
-    width: min(100%, 340px);
+    width: 100%;
+  }
+
+  .feature-visual img {
+    transform: scale(1.08);
   }
 
   .feature-row h2,
