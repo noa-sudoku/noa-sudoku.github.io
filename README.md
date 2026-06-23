@@ -26,14 +26,6 @@ Noa Sudoku는 광고 없이 스도쿠에만 집중할 수 있도록 만든 iPhon
 - 개인정보 처리방침: 앱의 데이터 수집, 저장, iCloud 사용, 알림, 문의 정보
 - 지원: 문의 이메일과 자주 묻는 질문
 
-개발 명령:
-
-```bash
-npm install
-npm run build
-npm run dev
-```
-
 ## English
 
 This is the official website for Noa Sudoku.
@@ -53,14 +45,6 @@ Main pages:
 - Privacy Policy: data collection, storage, iCloud usage, notifications, and contact information
 - Support: support email and frequently asked questions
 
-Development commands:
-
-```bash
-npm install
-npm run build
-npm run dev
-```
-
 ## 日本語
 
 Noa Sudoku公式Webサイトです。
@@ -79,14 +63,6 @@ Noa Sudokuは、広告なしで数独に集中できるiPhone、iPad向けの数
 - 機能: 広告なしのプレイ、難易度別パズル、記録、ヒント、ウィジェット、iCloud同期
 - プライバシーポリシー: データ収集、保存、iCloud利用、通知、問い合わせ情報
 - サポート: 問い合わせメールとよくある質問
-
-開発コマンド:
-
-```bash
-npm install
-npm run build
-npm run dev
-```
 
 ## Copyright
 
