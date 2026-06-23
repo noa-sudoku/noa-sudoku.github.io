@@ -701,7 +701,7 @@ html[lang="ja"] .policy-item h2 {
 
 .feature-row {
   display: grid;
-  grid-template-columns: 70px minmax(0, 1fr) minmax(190px, 320px);
+  grid-template-columns: 70px minmax(0, 1fr) minmax(260px, 420px);
   gap: 28px;
   align-items: center;
   width: 100%;
@@ -738,8 +738,8 @@ html[lang="ja"] .policy-item h2 {
 .feature-visual {
   position: relative;
   justify-self: end;
-  width: min(320px, 100%);
-  aspect-ratio: 1.52;
+  width: min(420px, 100%);
+  aspect-ratio: 16 / 9;
   overflow: visible;
   border-radius: 8px;
   background: transparent;
@@ -747,18 +747,19 @@ html[lang="ja"] .policy-item h2 {
 }
 
 .feature-visual img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
 
 :root[data-theme="dark"] .feature-visual {
-  background: var(--surface);
+  background: transparent;
 }
 
-.feature-visual-difficulty img {
-  object-fit: cover;
+:root[data-theme="dark"] .feature-visual img {
+  filter: invert(1) hue-rotate(180deg) brightness(1.08);
 }
 
 .feature-visual-no-ads,
@@ -767,7 +768,7 @@ html[lang="ja"] .policy-item h2 {
 .feature-visual-help,
 .feature-visual-notification,
 .feature-visual-icloud {
-  aspect-ratio: 640 / 420;
+  aspect-ratio: 16 / 9;
 }
 
 .feature-visual-difficulty {
@@ -1191,16 +1192,16 @@ html[lang="ja"] .policy-item h2 {
   }
 
   .feature-row {
-    grid-template-columns: 54px minmax(0, 1fr) 220px;
+    grid-template-columns: 54px minmax(0, 1fr) 260px;
     gap: 20px;
   }
 
   .feature-visual {
-    width: 220px;
+    width: 260px;
   }
 
   .feature-visual-difficulty {
-    width: 220px;
+    width: 260px;
   }
 
   .support-contact {

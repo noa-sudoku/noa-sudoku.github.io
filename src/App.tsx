@@ -812,7 +812,7 @@ function FeaturesPage({ lang }: { lang: Lang }) {
               <h2>{item.title}</h2>
               <p>{item.body}</p>
             </div>
-            <FeatureVisual index={index} />
+            <FeatureVisual index={index} lang={lang} />
           </section>
         ))}
       </div>
@@ -821,20 +821,20 @@ function FeaturesPage({ lang }: { lang: Lang }) {
 }
 
 const featureVisuals = [
-  { kind: "no-ads", src: "/assets/feature-no-ads.svg" },
-  { kind: "difficulty", src: "/assets/feature-difficulty-levels.svg" },
-  { kind: "records", src: "/assets/feature-records-calendar.svg" },
-  { kind: "help", src: "/assets/feature-help-hint.svg" },
-  { kind: "notification", src: "/assets/feature-widget-notification.svg" },
-  { kind: "icloud", src: "/assets/feature-cloud-sync.svg" }
+  { kind: "no-ads", file: "01-no-ads.png" },
+  { kind: "difficulty", file: "02-difficulty.png" },
+  { kind: "records", file: "03-records.png" },
+  { kind: "help", file: "04-help.png" },
+  { kind: "notification", file: "05-notification.png" },
+  { kind: "icloud", file: "06-icloud.png" }
 ] as const;
 
-function FeatureVisual({ index }: { index: number }) {
+function FeatureVisual({ index, lang }: { index: number; lang: Lang }) {
   const visual = featureVisuals[index] ?? featureVisuals[0];
 
   return (
     <div className={`feature-visual feature-visual-${visual.kind}`} aria-hidden="true">
-      <img src={visual.src} alt="" />
+      <img src={`/assets/feature-illustrations/${lang}/${visual.file}`} alt="" />
     </div>
   );
 }
