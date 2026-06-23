@@ -232,7 +232,16 @@ func draw(_ label: Label) {
   shadow.shadowColor = NSColor.clear
   shadow.shadowBlurRadius = 0
 
-  let attributes: [NSAttributedString.Key: Any] = [
+  let outlineAttributes: [NSAttributedString.Key: Any] = [
+    .font: font,
+    .foregroundColor: label.color,
+    .strokeColor: NSColor.white.withAlphaComponent(0.96),
+    .strokeWidth: -3.2,
+    .paragraphStyle: paragraph,
+    .shadow: shadow
+  ]
+
+  let fillAttributes: [NSAttributedString.Key: Any] = [
     .font: font,
     .foregroundColor: label.color,
     .paragraphStyle: paragraph,
@@ -241,7 +250,8 @@ func draw(_ label: Label) {
 
   let value = label.lines.joined(separator: "\n")
   let canvasRect = toCanvas(label.rect)
-  value.draw(in: canvasRect, withAttributes: attributes)
+  value.draw(in: canvasRect, withAttributes: outlineAttributes)
+  value.draw(in: canvasRect, withAttributes: fillAttributes)
 }
 
 func preferredFont(size: CGFloat) -> NSFont {
