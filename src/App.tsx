@@ -712,7 +712,7 @@ function HomePage({ lang, theme }: { lang: Lang; theme: Theme }) {
           <p className="hero-title">{t.heroTitle}</p>
           <p className="hero-body">{t.heroBody}</p>
         </div>
-        <DeviceShowcase />
+        <DeviceShowcase lang={lang} />
         <div className="hero-download">
           <AppStoreBadge lang={lang} theme={theme} />
           <a className="hero-qr" href={SHORT_URL} target="_blank" rel="noreferrer">
@@ -755,15 +755,18 @@ function AppStoreBadge({ lang, theme }: { lang: Lang; theme: Theme }) {
   );
 }
 
-function DeviceShowcase() {
+function DeviceShowcase({ lang }: { lang: Lang }) {
+  const gameScreen = `/assets/screen-game-${lang}.png`;
+  const homeScreen = `/assets/screen-home-${lang}.png`;
+
   return (
     <div className="device-area" aria-label="Noa Sudoku app preview">
       <div className="device device-main">
-        <img className="device-screen" src="/assets/screen-game.png" alt="Noa Sudoku game screen" />
+        <img className="device-screen" src={gameScreen} alt="Noa Sudoku game screen" />
         <img className="device-bezel" src="/assets/iphone-15-pro-black-titanium-portrait.png" alt="" />
       </div>
       <div className="device device-secondary">
-        <img className="device-screen" src="/assets/screen-home.png" alt="Noa Sudoku home screen" />
+        <img className="device-screen" src={homeScreen} alt="Noa Sudoku home screen" />
         <img className="device-bezel" src="/assets/iphone-15-pro-blue-titanium-portrait.png" alt="" />
       </div>
     </div>
