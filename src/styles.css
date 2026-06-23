@@ -711,6 +711,10 @@ html[lang="ja"] .policy-item h2 {
   border-bottom: 1px solid var(--line);
 }
 
+.feature-row:last-child {
+  border-bottom: 0;
+}
+
 .feature-row span {
   color: var(--accent);
   font-size: 0.78rem;
@@ -833,6 +837,10 @@ html[lang="ja"] .policy-item h2 {
   border-bottom: 1px solid var(--line);
 }
 
+.qa-item:last-child {
+  border-bottom: 0;
+}
+
 .policy-list {
   display: grid;
   gap: 0;
@@ -844,6 +852,10 @@ html[lang="ja"] .policy-item h2 {
   gap: 10px;
   padding: 30px 0;
   border-bottom: 1px solid var(--line);
+}
+
+.policy-item:last-child {
+  border-bottom: 0;
 }
 
 .policy-item h2 {
