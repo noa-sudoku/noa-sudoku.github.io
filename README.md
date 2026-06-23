@@ -91,6 +91,13 @@ Noa Sudokuは、広告なしで数独に集中できるiPhone、iPad向けの数
 - プライバシーポリシー: データ収集、保存、iCloud利用、通知、問い合わせ情報
 - サポート: 問い合わせメールとよくある質問
 
+## Illustration Credits
+
+Feature illustrations were custom generated for Noa Sudoku using the visual direction of Ian Xiaohei Illustrations by Ian.
+
+- Repository: https://github.com/helloianneo/ian-xiaohei-illustrations
+- Author: Ian / https://github.com/helloianneo
+
 ## Copyright
 
 © 2025 TaeHwan Kim. All rights reserved.
