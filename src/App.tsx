@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 
-type Lang = "ko" | "en";
+type Lang = "ko" | "en" | "ja";
 type Theme = "light" | "dark";
 type Page = "home" | "features" | "support" | "privacy";
 
@@ -24,10 +24,76 @@ const appStoreBadge = {
       "https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/white/en-us?releaseDate=1765238400",
     width: 245,
     alt: "Download on the App Store"
+  },
+  ja: {
+    black:
+      "https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ja-jp?releaseDate=1765238400",
+    white:
+      "https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/white/ja-jp?releaseDate=1765238400",
+    width: 245,
+    alt: "App Storeからダウンロード"
   }
 } satisfies Record<Lang, { black: string; white: string; width: number; alt: string }>;
 
-const copy = {
+type CopyContent = {
+  home: string;
+  features: string;
+  support: string;
+  subtitle: string;
+  privacy: string;
+  preferences: string;
+  language: string;
+  theme: string;
+  light: string;
+  dark: string;
+  heroLead: string;
+  heroTitle: string;
+  heroBody: string;
+  badgeLabel: string;
+  shortLinkLabel: string;
+  menu: string;
+  close: string;
+  primaryNavigation: string;
+  sectionOverline: string;
+  sectionTitle: string;
+  sectionBody: string;
+  sectionMore: string;
+  privacyOverline: string;
+  copyright: string;
+  pageTitles: Record<Page, string>;
+};
+
+type FeaturePageContent = {
+  overline: string;
+  title: string;
+  body: string;
+  items: Array<{ title: string; body: string }>;
+};
+
+type SupportContent = {
+  overline: string;
+  title: string;
+  body: string;
+  contactTitle: string;
+  contactBody: string;
+  emailLabel: string;
+  questions: Array<{ q: string; a: string }>;
+};
+
+type PolicyContent = {
+  title: string;
+  updated: string;
+  intro: string[];
+  sections: Array<{
+    title: string;
+    paragraphs: string[];
+    bullets?: string[];
+    closing?: string | string[];
+    email?: string;
+  }>;
+};
+
+const copy: Record<Lang, CopyContent> = {
   ko: {
     home: "홈",
     features: "기능",
@@ -47,11 +113,20 @@ const copy = {
     shortLinkLabel: "짧은 링크",
     menu: "메뉴",
     close: "닫기",
+    primaryNavigation: "주요 탐색",
+    sectionOverline: "Sudoku, simplified",
     sectionTitle: "필요한 기능만 남긴 스도쿠",
     sectionBody:
       "새 게임, 난이도별 기록, 날짜별 기록, 힌트와 되돌리기. 매일 풀기에 필요한 흐름만 담았습니다.",
     sectionMore: "더보기 ->",
-    copyright: "© 2025 TaeHwan Kim. All rights reserved."
+    privacyOverline: "Privacy Policy / 개인정보 처리방침",
+    copyright: "© 2025 TaeHwan Kim. All rights reserved.",
+    pageTitles: {
+      home: "Noa Sudoku",
+      features: "Noa Sudoku 기능",
+      support: "Noa Sudoku 지원",
+      privacy: "Noa Sudoku 개인정보 처리방침"
+    }
   },
   en: {
     home: "Home",
@@ -72,30 +147,76 @@ const copy = {
     shortLinkLabel: "Short link",
     menu: "Menu",
     close: "Close",
+    primaryNavigation: "Primary navigation",
+    sectionOverline: "Sudoku, simplified",
     sectionTitle: "Only what Sudoku needs",
     sectionBody:
       "New games, difficulty records, daily history, hints, and undo. The app keeps the daily solving loop simple.",
     sectionMore: "More ->",
-    copyright: "© 2025 TaeHwan Kim. All rights reserved."
+    privacyOverline: "Privacy Policy",
+    copyright: "© 2025 TaeHwan Kim. All rights reserved.",
+    pageTitles: {
+      home: "Noa Sudoku",
+      features: "Noa Sudoku Features",
+      support: "Noa Sudoku Support",
+      privacy: "Noa Sudoku Privacy Policy"
+    }
+  },
+  ja: {
+    home: "ホーム",
+    features: "機能",
+    support: "サポート",
+    subtitle: "広告なしの数独",
+    privacy: "プライバシー",
+    preferences: "表示設定",
+    language: "言語",
+    theme: "テーマ",
+    light: "ライト",
+    dark: "ダーク",
+    heroLead: "Noa Sudoku",
+    heroTitle: "静かに解いて、記録は軽やかに残せます。",
+    heroBody:
+      "広告、バナー、余計な装飾なしで数独に集中できるiPhone、iPad向けアプリです。",
+    badgeLabel: "ダウンロード",
+    shortLinkLabel: "短縮リンク",
+    menu: "メニュー",
+    close: "閉じる",
+    primaryNavigation: "主要ナビゲーション",
+    sectionOverline: "Sudoku, simplified",
+    sectionTitle: "必要な機能だけを残した数独",
+    sectionBody:
+      "新しいゲーム、難易度別の記録、日別の記録、ヒントと元に戻す。毎日解くために必要な流れだけをまとめました。",
+    sectionMore: "詳しく見る ->",
+    privacyOverline: "プライバシーポリシー",
+    copyright: "© 2025 TaeHwan Kim. All rights reserved.",
+    pageTitles: {
+      home: "Noa Sudoku",
+      features: "Noa Sudoku 機能",
+      support: "Noa Sudoku サポート",
+      privacy: "Noa Sudoku プライバシーポリシー"
+    }
   }
-} satisfies Record<Lang, Record<string, string>>;
+};
 
 const features = [
   {
     ko: ["광고 없음", "배너와 팝업 없이 보드에 집중합니다."],
-    en: ["No ads", "No banners or popups interrupt the board."]
+    en: ["No ads", "No banners or popups interrupt the board."],
+    ja: ["広告なし", "バナーやポップアップに邪魔されず、盤面に集中できます。"]
   },
   {
     ko: ["기록", "난이도별 최고 기록과 날짜별 기록을 확인합니다."],
-    en: ["Records", "Track best scores by difficulty and daily play."]
+    en: ["Records", "Track best scores by difficulty and daily play."],
+    ja: ["記録", "難易度別のベスト記録と日別のプレイ記録を確認できます。"]
   },
   {
     ko: ["도움", "힌트와 되돌리기는 필요할 때만 씁니다."],
-    en: ["Help", "Hints and undo stay available when needed."]
+    en: ["Help", "Hints and undo stay available when needed."],
+    ja: ["サポート", "ヒントと元に戻すは必要なときだけ使えます。"]
   }
 ] satisfies Array<Record<Lang, [string, string]>>;
 
-const featurePageContent = {
+const featurePageContent: Record<Lang, FeaturePageContent> = {
   ko: {
     overline: "Features / 기능 소개",
     title: "필요한 기능만 남긴 스도쿠",
@@ -160,10 +281,42 @@ const featurePageContent = {
           "When iCloud is available, clear records and related statistics can sync through your Apple account's private database."
       }
     ]
+  },
+  ja: {
+    overline: "機能",
+    title: "必要なものだけに絞った数独",
+    body:
+      "Noa Sudokuは、盤面への集中、軽やかな記録、必要なときだけ使えるサポートを大切にしています。",
+    items: [
+      {
+        title: "広告なしのプレイ",
+        body: "広告SDK、バナー、ポップアップなし。数独の盤面と記録だけに集中できます。"
+      },
+      {
+        title: "難易度別パズル",
+        body: "かんたんからマスターまで、その日に合う難易度を選んで始められます。"
+      },
+      {
+        title: "記録とカレンダー",
+        body: "難易度別のベスト記録と日別のプレイ履歴を、余計な操作なしで確認できます。"
+      },
+      {
+        title: "必要なときだけ使える補助",
+        body: "ヒント、元に戻す、メモ機能は、解く流れを邪魔しないよう必要な瞬間だけ使えます。"
+      },
+      {
+        title: "ウィジェットと通知",
+        body: "ホーム画面ウィジェットとリマインダーで、毎日解く習慣を軽く続けられます。"
+      },
+      {
+        title: "iCloud同期",
+        body: "iCloudを利用できる環境では、クリア記録と一部の統計がAppleアカウントのプライベートデータベースで同期される場合があります。"
+      }
+    ]
   }
-} satisfies Record<Lang, { overline: string; title: string; body: string; items: Array<{ title: string; body: string }> }>;
+};
 
-const supportContent = {
+const supportContent: Record<Lang, SupportContent> = {
   ko: {
     overline: "Support / 지원",
     title: "도움이 필요하신가요?",
@@ -203,21 +356,30 @@ const supportContent = {
         a: "Records are primarily stored on your device. When iCloud / CloudKit is used, data is stored in the private database associated with your Apple account, and the developer cannot access your personal iCloud data."
       }
     ]
+  },
+  ja: {
+    overline: "サポート",
+    title: "Noa Sudokuでお困りですか？",
+    body:
+      "アプリの動作に問題がある場合やプライバシーに関する質問がある場合は、以下のメールアドレスまでご連絡ください。",
+    contactTitle: "サポートに問い合わせる",
+    contactBody:
+      "すばやく確認できるよう、再現手順、必要に応じたスクリーンショット、アプリのバージョン、端末モデル、iOSバージョン、発生した画面を添えてください。",
+    emailLabel: "メールを送る",
+    questions: [
+      {
+        q: "Noa Sudokuに広告はありますか？",
+        a: "いいえ。Noa Sudokuは広告SDK、バナー、ポップアップ広告を使用しません。"
+      },
+      {
+        q: "記録とiCloudデータはどのように保存されますか？",
+        a: "記録は基本的に端末内に保存されます。iCloud / CloudKitを使用する場合、データはAppleアカウントに紐づくプライベートデータベースに保存され、開発者が個人のiCloudデータへアクセスすることはできません。"
+      }
+    ]
   }
-} satisfies Record<
-  Lang,
-  {
-    overline: string;
-    title: string;
-    body: string;
-    contactTitle: string;
-    contactBody: string;
-    emailLabel: string;
-    questions: Array<{ q: string; a: string }>;
-  }
->;
+};
 
-const policyContent = {
+const policyContent: Record<Lang, PolicyContent> = {
   ko: {
     title: "개인정보 처리방침",
     updated: "최종 업데이트: 2026-06-10",
@@ -319,22 +481,59 @@ const policyContent = {
         email: "iam@xoghks.com"
       }
     ]
+  },
+  ja: {
+    title: "プライバシーポリシー",
+    updated: "最終更新日: 2026-06-10",
+    intro: [
+      "Noa Sudoku（以下「本アプリ」）は、アカウント登録を求めず、氏名、電話番号、住所、位置情報、広告識別子などの一般的な個人情報を収集しません。"
+    ],
+    sections: [
+      {
+        title: "1. 個人情報の収集",
+        paragraphs: [
+          "本アプリは、氏名、メールアドレス、電話番号、住所、位置情報、広告識別子などの個人情報を収集しません。",
+          "アプリの利用中に生成されるパズルの進行状況、難易度、記録、統計、通知設定などは、アプリ機能を提供するために端末内に保存される場合があり、開発者が運営するサーバーには送信されません。",
+          "お問い合わせ機能を利用する場合、利用者が作成したメール本文、および利用者が送信を選択した場合に本文へ含まれるアプリバージョン、端末モデル、iOSバージョンなどの診断情報が、メールを通じて開発者へ送信される場合があります。"
+        ]
+      },
+      {
+        title: "2. データの保存",
+        paragraphs: [
+          "ゲームデータは基本的に利用者の端末内に保存されます。",
+          "iCloudを利用できる環境では、クリア記録および一部の統計データが、利用者のAppleアカウントに関連付けられたiCloud（CloudKit private database）を通じて同期される場合があります。"
+        ]
+      },
+      {
+        title: "3. 第三者提供および外部サービス",
+        paragraphs: [
+          "本アプリは、広告SDK、外部分析ツール、ソーシャルログインSDKを使用しません。",
+          "ただし、アプリ機能を提供するためにAppleが提供する以下のサービスを使用する場合があります。"
+        ],
+        bullets: ["iCloud / CloudKit", "ローカル通知", "App Storeレビュー依頼", "メールアプリによる問い合わせ送信"],
+        closing: [
+          "本アプリは、利用者のデータを広告目的で第三者へ販売または提供しません。",
+          "iCloud / CloudKitに保存されるデータは、利用者のAppleアカウントに関連付けられたプライベートデータベースに保存され、開発者が利用者の個人iCloudデータへアクセスすることはできません。"
+        ]
+      },
+      {
+        title: "4. 通知",
+        paragraphs: ["本アプリは、利用者が許可した場合にのみローカル通知を送信します。", "通知には以下が含まれる場合があります。"],
+        bullets: ["毎日のリマインダー通知", "再開リマインダー通知"],
+        closing: "通知の許可は、いつでもiOS設定から変更できます。"
+      },
+      {
+        title: "5. 子どものプライバシー",
+        paragraphs: ["本アプリは、子どもから個人情報を意図的に収集することはありません。"]
+      },
+      {
+        title: "6. お問い合わせ",
+        paragraphs: ["本プライバシーポリシーについてご質問がある場合は、以下までお問い合わせください。"],
+        email: "iam@xoghks.com"
+      }
+    ]
   }
-} satisfies Record<
-  Lang,
-  {
-    title: string;
-    updated: string;
-    intro: string[];
-    sections: Array<{
-      title: string;
-      paragraphs: string[];
-      bullets?: string[];
-      closing?: string | string[];
-      email?: string;
-    }>;
-  }
->;
+};
 
 function getInitialTheme(): Theme {
   const saved = window.localStorage.getItem("noa-theme");
@@ -344,8 +543,11 @@ function getInitialTheme(): Theme {
 
 function getInitialLang(): Lang {
   const saved = window.localStorage.getItem("noa-lang");
-  if (saved === "ko" || saved === "en") return saved;
-  return navigator.language.toLowerCase().startsWith("ko") ? "ko" : "en";
+  if (saved === "ko" || saved === "en" || saved === "ja") return saved;
+  const language = navigator.language.toLowerCase();
+  if (language.startsWith("ko")) return "ko";
+  if (language.startsWith("ja")) return "ja";
+  return "en";
 }
 
 function getPage(): Page {
@@ -372,14 +574,8 @@ function App() {
   }, [lang]);
 
   useEffect(() => {
-    const titles: Record<Page, string> = {
-      home: "Noa Sudoku",
-      features: "Noa Sudoku Features",
-      support: "Noa Sudoku Support",
-      privacy: "Noa Sudoku Privacy Policy"
-    };
-    document.title = titles[page];
-  }, [page]);
+    document.title = copy[lang].pageTitles[page];
+  }, [lang, page]);
 
   return (
     <>
@@ -434,7 +630,7 @@ function Header({
       </button>
       <div className="site-menu" id="site-menu">
         <div className="menu-brand">Noa Sudoku</div>
-        <nav className="page-tabs" aria-label="Primary navigation">
+        <nav className="page-tabs" aria-label={t.primaryNavigation}>
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -453,6 +649,9 @@ function Header({
             </button>
             <button type="button" aria-pressed={lang === "en"} onClick={() => setLang("en")}>
               EN
+            </button>
+            <button type="button" aria-pressed={lang === "ja"} onClick={() => setLang("ja")}>
+              JA
             </button>
           </div>
           <button
@@ -524,7 +723,7 @@ function HomePage({ lang, theme }: { lang: Lang; theme: Theme }) {
 
       <section className="section simple-section">
         <div className="section-copy">
-          <p className="overline">Sudoku, simplified</p>
+          <p className="overline">{t.sectionOverline}</p>
           <h2>{t.sectionTitle}</h2>
           <p>{t.sectionBody}</p>
           <a className="section-more" href="/features/">
@@ -575,7 +774,9 @@ function renderPolicyText(text: string, lang: Lang): ReactNode {
   const phrases =
     lang === "ko"
       ? ["개인정보를 수집하지 않습니다", "수집하지 않습니다"]
-      : ["does not collect", "does not knowingly collect"];
+      : lang === "ja"
+        ? ["個人情報を収集しません", "収集しません", "意図的に収集することはありません"]
+        : ["does not collect", "does not knowingly collect"];
   const phrase = phrases.find((candidate) => text.includes(candidate));
 
   if (!phrase) return text;
@@ -666,11 +867,12 @@ function SupportPage({ lang }: { lang: Lang }) {
 
 function PrivacyPage({ lang }: { lang: Lang }) {
   const policy = policyContent[lang];
+  const t = copy[lang];
 
   return (
     <article className="document-page">
       <header className="document-hero">
-        <p className="overline">Privacy Policy / 개인정보 처리방침</p>
+        <p className="overline">{t.privacyOverline}</p>
         <h1>{policy.title}</h1>
         <p>{policy.updated}</p>
         {policy.intro.map((paragraph) => (
