@@ -236,7 +236,7 @@ func draw(_ label: Label) {
     .font: font,
     .foregroundColor: label.color,
     .strokeColor: NSColor.white.withAlphaComponent(0.96),
-    .strokeWidth: -3.2,
+    .strokeWidth: -8.0,
     .paragraphStyle: paragraph,
     .shadow: shadow
   ]
