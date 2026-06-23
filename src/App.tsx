@@ -712,7 +712,7 @@ function HomePage({ lang, theme }: { lang: Lang; theme: Theme }) {
           <p className="hero-title">{t.heroTitle}</p>
           <p className="hero-body">{t.heroBody}</p>
         </div>
-        <DeviceShowcase />
+        <DeviceShowcase lang={lang} />
         <div className="hero-download">
           <AppStoreBadge lang={lang} theme={theme} />
           <a className="hero-qr" href={SHORT_URL} target="_blank" rel="noreferrer">
@@ -755,15 +755,18 @@ function AppStoreBadge({ lang, theme }: { lang: Lang; theme: Theme }) {
   );
 }
 
-function DeviceShowcase() {
+function DeviceShowcase({ lang }: { lang: Lang }) {
+  const gameScreen = `/assets/screen-game-${lang}.png`;
+  const homeScreen = `/assets/screen-home-${lang}.png`;
+
   return (
     <div className="device-area" aria-label="Noa Sudoku app preview">
       <div className="device device-main">
-        <img className="device-screen" src="/assets/screen-game.png" alt="Noa Sudoku game screen" />
+        <img className="device-screen" src={gameScreen} alt="Noa Sudoku game screen" />
         <img className="device-bezel" src="/assets/iphone-15-pro-black-titanium-portrait.png" alt="" />
       </div>
       <div className="device device-secondary">
-        <img className="device-screen" src="/assets/screen-home.png" alt="Noa Sudoku home screen" />
+        <img className="device-screen" src={homeScreen} alt="Noa Sudoku home screen" />
         <img className="device-bezel" src="/assets/iphone-15-pro-blue-titanium-portrait.png" alt="" />
       </div>
     </div>
@@ -809,7 +812,7 @@ function FeaturesPage({ lang }: { lang: Lang }) {
               <h2>{item.title}</h2>
               <p>{item.body}</p>
             </div>
-            <FeatureVisual index={index} />
+            <FeatureVisual index={index} lang={lang} />
           </section>
         ))}
       </div>
@@ -818,20 +821,20 @@ function FeaturesPage({ lang }: { lang: Lang }) {
 }
 
 const featureVisuals = [
-  { kind: "no-ads", src: "/assets/feature-no-ads.svg" },
-  { kind: "difficulty", src: "/assets/feature-difficulty-levels.svg" },
-  { kind: "records", src: "/assets/feature-records-calendar.svg" },
-  { kind: "help", src: "/assets/feature-help-hint.svg" },
-  { kind: "notification", src: "/assets/feature-widget-notification.svg" },
-  { kind: "icloud", src: "/assets/feature-cloud-sync.svg" }
+  { kind: "no-ads", file: "01-no-ads.png" },
+  { kind: "difficulty", file: "02-difficulty.png" },
+  { kind: "records", file: "03-records.png" },
+  { kind: "help", file: "04-help.png" },
+  { kind: "notification", file: "05-notification.png" },
+  { kind: "icloud", file: "06-icloud.png" }
 ] as const;
 
-function FeatureVisual({ index }: { index: number }) {
+function FeatureVisual({ index, lang }: { index: number; lang: Lang }) {
   const visual = featureVisuals[index] ?? featureVisuals[0];
 
   return (
     <div className={`feature-visual feature-visual-${visual.kind}`} aria-hidden="true">
-      <img src={visual.src} alt="" />
+      <img src={`/assets/feature-illustrations/${lang}/${visual.file}`} alt="" />
     </div>
   );
 }

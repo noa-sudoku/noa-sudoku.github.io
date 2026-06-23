@@ -669,7 +669,7 @@ html[lang="ja"] .policy-item h2 {
 }
 
 .marketing-page {
-  width: min(960px, calc(100% - 32px));
+  width: min(1120px, calc(100% - 32px));
 }
 
 .document-hero {
@@ -701,14 +701,18 @@ html[lang="ja"] .policy-item h2 {
 
 .feature-row {
   display: grid;
-  grid-template-columns: 70px minmax(0, 1fr) minmax(190px, 320px);
-  gap: 28px;
+  grid-template-columns: 58px minmax(260px, 360px) minmax(480px, 1fr);
+  gap: 36px;
   align-items: center;
   width: 100%;
   max-width: 100%;
   min-width: 0;
   padding: 32px 0;
   border-bottom: 1px solid var(--line);
+}
+
+.feature-row:last-child {
+  border-bottom: 0;
 }
 
 .feature-row span {
@@ -734,8 +738,8 @@ html[lang="ja"] .policy-item h2 {
 .feature-visual {
   position: relative;
   justify-self: end;
-  width: min(320px, 100%);
-  aspect-ratio: 1.52;
+  width: min(620px, 100%);
+  aspect-ratio: 16 / 9;
   overflow: visible;
   border-radius: 8px;
   background: transparent;
@@ -743,18 +747,20 @@ html[lang="ja"] .policy-item h2 {
 }
 
 .feature-visual img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
+  transform-origin: center;
 }
 
 :root[data-theme="dark"] .feature-visual {
-  background: var(--surface);
+  background: transparent;
 }
 
-.feature-visual-difficulty img {
-  object-fit: cover;
+:root[data-theme="dark"] .feature-visual img {
+  filter: invert(1) hue-rotate(180deg) brightness(1.08);
 }
 
 .feature-visual-no-ads,
@@ -763,11 +769,11 @@ html[lang="ja"] .policy-item h2 {
 .feature-visual-help,
 .feature-visual-notification,
 .feature-visual-icloud {
-  aspect-ratio: 640 / 420;
+  aspect-ratio: 16 / 9;
 }
 
 .feature-visual-difficulty {
-  width: min(320px, 100%);
+  width: min(620px, 100%);
 }
 
 .feature-row p,
@@ -833,6 +839,10 @@ html[lang="ja"] .policy-item h2 {
   border-bottom: 1px solid var(--line);
 }
 
+.qa-item:last-child {
+  border-bottom: 0;
+}
+
 .policy-list {
   display: grid;
   gap: 0;
@@ -844,6 +854,10 @@ html[lang="ja"] .policy-item h2 {
   gap: 10px;
   padding: 30px 0;
   border-bottom: 1px solid var(--line);
+}
+
+.policy-item:last-child {
+  border-bottom: 0;
 }
 
 .policy-item h2 {
@@ -1179,16 +1193,16 @@ html[lang="ja"] .policy-item h2 {
   }
 
   .feature-row {
-    grid-template-columns: 54px minmax(0, 1fr) 220px;
-    gap: 20px;
+    grid-template-columns: 48px minmax(0, 1fr) minmax(330px, 390px);
+    gap: 22px;
   }
 
   .feature-visual {
-    width: 220px;
+    width: min(390px, 100%);
   }
 
   .feature-visual-difficulty {
-    width: 220px;
+    width: min(390px, 100%);
   }
 
   .support-contact {
@@ -1285,21 +1299,26 @@ html[lang="ja"] .policy-item h2 {
 
   .feature-row {
     grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 28px 0;
+    gap: 18px;
+    padding: 34px 0;
   }
 
   .feature-visual {
-    justify-self: start;
-    width: min(100%, 340px);
+    justify-self: center;
+    width: 100%;
+    margin-top: 2px;
   }
 
   .feature-visual-difficulty {
-    width: min(100%, 340px);
+    width: 100%;
   }
 
   .feature-visual-records {
-    width: min(100%, 340px);
+    width: 100%;
+  }
+
+  .feature-visual img {
+    transform: scale(1.08);
   }
 
   .feature-row h2,
